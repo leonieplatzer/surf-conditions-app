@@ -6,6 +6,7 @@ library(jsonlite)
 library(httr)
 library(tidyverse)
 library(lubridate)
+library(leaflet)
 
 source("data/spots_and_countries.R")
 source("data/coords_by_spot.R")
@@ -49,7 +50,9 @@ ui <- fluidPage(
     
     mainPanel(
       tabsetPanel(
-        
+        tabPanel("Map",
+                 leafletOutput("map", height = "400px"),
+                 ),
         tabPanel("Annual Wave Variation", 
                  fluidRow(
                    column(12, plotOutput("wave_height_yearly"))
@@ -304,6 +307,30 @@ server <- function(input, output) {
             plot.margin = unit(c(top = 1, right = .5, bottom = 1, left = .5), "cm"))
     
   })
+  
+  output$map <- renderLeaflet({
+    req(input$country)
+    
+    spots <- spots_by_country[[input$country]]
+    if (is.null(spots)) return(NULL)  # Defensive check
+    
+    coords <- lapply(spots, function(spot) spot_coords[[spot]])
+    
+    df <- data.frame(
+      spot = spots,
+      lat = sapply(coords, function(x) x['lat']),
+      lng = sapply(coords, function(x) x['lng'])
+    )
+    
+    center_lat <- mean(df$lat)
+    center_lng <- mean(df$lng)
+    
+    leaflet(df) %>%
+      addTiles() %>%
+      addMarkers(~lng, ~lat, popup = ~spot) %>%
+      setView(lng = center_lng, lat = center_lat, zoom = 8)
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)
