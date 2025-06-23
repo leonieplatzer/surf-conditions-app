@@ -215,24 +215,44 @@ server <- function(input, output) {
   output$wind_waves <- renderPlot({
     req(daily_data())
     
-    ggplot(daily_data(), aes(x = ymd(date))) +
-      geom_line(aes(y = wave_height_max, color = "Total Wave Height")) +
-      geom_line(aes(y = wind_wave_height_max, color = "Wind Wave Height")) +
-      labs(
-        title = "Total vs Wind-Generated Wave Heights Over Time",
-        x = "Date",
-        y = "Wave Height (m)",
-        color = "Wave Type"
+    # Transform data to long format
+    monthly_data <- daily_data() %>%
+      mutate(month = floor_date(ymd(date), "month")) %>%
+      group_by(month) %>%
+      summarise(
+        `Total Wave Height` = mean(wave_height_max, na.rm = TRUE),
+        `Wind Wave Height` = mean(wind_wave_height_max, na.rm = TRUE)
+      ) %>%
+      pivot_longer(
+        cols = c(`Total Wave Height`, `Wind Wave Height`),
+        names_to = "Wave_Type",
+        values_to = "Height"
+      )
+    ggplot(monthly_data, aes(x = month, y = Height, fill = Wave_Type)) +
+      geom_bar(
+        stat = "identity",
+        width = 25,  # wide bins to span the month
+        position = position_dodge(width = 30)
       ) +
-      scale_color_manual(
+      labs(
+        title = "Monthly Average \n Total vs Wind-Generated Wave Heights",
+        x = "Month",
+        y = "Wave Height (m)",
+        fill = "Wave Type"
+      ) +
+      scale_fill_manual(
         values = c(
           "Total Wave Height" = "darkblue",
-          "Wind Wave Height" = "cyan3"
+          "Wind Wave Height" = "cadetblue2"
         )
       ) +
-      theme_minimal()+
-      theme(plot.title = element_text(size=18),
-            plot.margin = unit(c(top = 1, right = .5, bottom = 1, left = .5), "cm"))
+      scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(size = 18),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.margin = unit(c(top = 1, right = .5, bottom = 1, left = .5), "cm")
+      )
   })
   
   #wave height over wave period -> not super useful
