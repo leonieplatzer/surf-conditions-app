@@ -69,7 +69,7 @@ ui <- fluidPage(
         tabPanel("Wind vs Swell Influence",
                  fluidRow(
                    column(12, plotOutput("swell_dir")),
-                   column(10, plotOutput("wind_waves"))
+                   column(12, plotOutput("wind_waves"))
                     )
                  ),
       )
