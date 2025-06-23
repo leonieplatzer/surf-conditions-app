@@ -1,5 +1,5 @@
 spots_by_country <- list(
-  "Hawaii" = c("Pipeline", "Lahaina", "Honolua Bay", "Waikiki", "Sunset Beach", "Waimea Bay"),
+  "Hawaii" = c("Pipeline", "Lahaina", "Honolua Bay", "Waikiki", "Waimea Bay"),
   "Sri Lanka" = c("Weligama", "Mirissa", "Arugam Bay", "Hikkaduwa", "Unawatuna", "Midigama"),
   "Morocco" = c("Anchor Point", "Imsouane", "Taghazout", "Safi", "Essouira", "Dakhla"),
   "Portugal" = c("Nazaré", "Ericeira", "Peniche", "Supertubos", "Cascais", "Arrifana"),

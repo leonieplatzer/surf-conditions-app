@@ -7,8 +7,6 @@ spot_info <- list(
   
   "Waikiki" = "Waikiki Beach is famous for its gentle, rolling waves ideal for beginner surfers and longboarders. Located in Honolulu, it offers a vibrant city atmosphere alongside iconic views of Diamond Head. Surf schools and rentals make it a perfect place to start surfing.",
   
-  "Sunset Beach" = "Sunset Beach on Oahu's North Shore is known for its big wave surfing during winter months and more manageable waves in summer. It attracts expert surfers looking for challenging conditions and spectacular barrels. The beach also offers beautiful sunsets and a relaxed vibe.",
-  
   "Waimea Bay" = "Waimea Bay is renowned for massive winter swells attracting the world's top big wave surfers. In summer, the waves calm down, making it suitable for swimming and casual surfing. The bay is iconic in surf history and offers stunning natural beauty.",
   
   "Weligama" = "Weligama in Sri Lanka is a sandy bay perfect for beginner surfers due to its gentle waves and sandy bottom. Surf schools are abundant, and the town has a laid-back atmosphere with local cafés and markets. It’s a great place to start surfing in warm waters.",

@@ -32,7 +32,7 @@ ui <- fluidPage(
       
       selectInput("country", "🌐 Country", choices = names(spots_by_country)),
       uiOutput("spot_ui"),  # placeholder for the dynamic spot input
-      actionButton("view", "view forecast!"),
+      actionButton("view", "view data!"),
       
       hr(), 
       

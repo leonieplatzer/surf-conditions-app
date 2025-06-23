@@ -5,7 +5,6 @@ spot_coords <- list(
   "Lahaina" = c(lat = 20.878, lng = -156.682),
   "Honolua Bay" = c(lat = 21.012, lng = -156.640),
   "Waikiki" = c(lat = 21.282, lng = -157.837),
-  "Sunset Beach" = c(lat = 21.661, lng = -158.052),
   "Waimea Bay" = c(lat = 21.640, lng = -158.059),
   
   # Sri Lanka
