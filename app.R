@@ -1,6 +1,3 @@
-
-
-
 library(shiny)
 library(jsonlite)
 library(httr)
@@ -258,7 +255,7 @@ server <- function(input, output) {
       )
   })
   
-  #wave height over wave period -> not super useful
+  # wave height over wave period -> not super useful
   output$wave_period_plot <- renderPlot({
     req(daily_data())
     
@@ -284,7 +281,7 @@ server <- function(input, output) {
       theme_minimal()
   })
   
-  #at which swell direction does the spot work best?
+  # at which swell direction does the spot work best?
   output$swell_dir <- renderPlot({
     req(daily_data())
     
@@ -308,6 +305,7 @@ server <- function(input, output) {
     
   })
   
+  # interactive map
   output$map <- renderLeaflet({
     req(input$country)
     
