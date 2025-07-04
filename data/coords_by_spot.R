@@ -32,7 +32,7 @@ spot_coords <- list(
   "Arrifana" = c(lat = 37.295, lng = -8.830),
   
   # Indonesia (Bali area)
-  "Uluwatu" = c(lat = -8.432, lng = 115.084),
+  "Uluwatu" = c(lat = -8.828, lng = 115.087),
   "Canggu" = c(lat = -8.647, lng = 115.138),
   "Medewi" = c(lat = -8.432, lng = 114.763),
   "Padang Padang" = c(lat = -8.818, lng = 115.086),
@@ -42,8 +42,8 @@ spot_coords <- list(
   # Costa Rica
   "Santa Teresa" = c(lat = 9.633, lng = -85.161),
   "Tamarindo" = c(lat = 10.299, lng = -85.841),
-  "Nosara" = c(lat = 9.979, lng = -85.653),
-  "Dominical" = c(lat = 9.311, lng = -83.746),
+  "Nosara" = c(lat = 9.954, lng = --85.671),
+  "Dominical" = c(lat = 9.25, lng = -83.666),
   "Jaco" = c(lat = 9.621, lng = -84.630),
   "Playa Hermosa" = c(lat = 9.646, lng = -84.647),
   
@@ -61,6 +61,36 @@ spot_coords <- list(
   "Lacanau" = c(lat = 45.002, lng = -1.197),
   "Seignosse" = c(lat = 43.671, lng = -1.456),
   "Guéthary" = c(lat = 43.400, lng = -1.604),
-  "Anglet" = c(lat = 43.483, lng = -1.543)
+  "Anglet" = c(lat = 43.483, lng = -1.543),
+  
+  
+  # Brasil
+  "Arpoador" = c(lat = -22.983, lng = -43.176),     
+  "Maresias" = c(lat = -23.697, lng = -45.415),    
+  "Saquarema (Itaúna Beach)" = c(lat = -22.881, lng = -42.500),  
+  "Pipa Beach" = c(lat = -6.264, lng = -35.042),   
+  "Itamambuca" = c(lat = -23.353, lng = -45.275),
+  "Campeche" = c(lat = -27.676, lng = -48.488),
+  
+  # Nicaragua
+  "Popoyo" = c(lat = 11.4700989, lng = -86.1249244999),       
+  "Lance's Left" = c(lat = 11.366, lng = -85.692), 
+  "San Juan del Sur" = c(lat = 11.253, lng = -85.879),
+  
+  # El Salvador
+  "Punta Roca" = c(lat = 13.483, lng = -89.316),    
+  "El Sunzal" = c(lat = 13.458, lng = -89.265),   
+  "K59" = c(lat = 13.4991, lng = -89.4736),          
+  "Las Flores" = c(lat = 13.350, lng = -88.570),    
+  "El Zonte" = c(lat = 13.426, lng = -89.281), 
+  
+  # Spain
+  "Mundaka" = c(lat = 43.408, lng = -2.700),        
+  "La Machacona" = c(lat = 43.550, lng = -8.110),   
+  "Sopelana" = c(lat = 43.375, lng = -2.998),        
+  "Meñakoz" = c(lat = 43.421, lng = -2.924),      
+  "Cala Cerrada (Alicante region)" = c(lat = 38.158, lng = -0.441)
+  
+  
 )
 
