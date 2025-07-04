@@ -2,7 +2,7 @@
 This Shiny app provides an intuitive and interactive way to explore and analyze wave and swell conditions at surf spots worldwide.
 # 🌊 Surf Spot Analysis Made Simple
 
-An interactive Shiny app for exploring and analyzing wave and swell conditions at surf spots around the world. The app fetches live marine forecast data from the [Open-Meteo Marine API](https://open-meteo.com/), and visualizes wave height, swell direction, wind-wave characteristics, and seasonal patterns in a clean, intuitive dashboard.
+An interactive Shiny app for exploring and analyzing wave and swell conditions at surf spots around the world. The app fetches historic marine forecast data from the [Open-Meteo Marine API](https://open-meteo.com/), and visualizes wave height, swell direction, wind-wave characteristics, and seasonal patterns in a clean, intuitive dashboard.
 
 ---
 
