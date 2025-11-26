@@ -8,7 +8,7 @@ library(plotly)
 
 source("data/spots_and_countries.R")
 source("data/coords_by_spot.R")
-source("data/spot_info.R")
+#source("data/spot_info.R")
 
 color_wheel <- colorRampPalette(c(
   "#E0FFFF",  # Light Cyan (0°)
@@ -86,10 +86,10 @@ ui <- fluidPage(
         tabPanel("Spot Comparison", value = "multi",
                  fluidRow(
                    column(6, div(class = "plot-container", plotOutput("multi_height_over_date"))),
-                   column(6, div(class = "plot-container", plotOutput("swell_bouquet")))
+                   column(6, div(class = "plot-container", plotOutput("swell_bouquet"))),
                  ),
                  fluidRow(
-                   
+                   column(12, div(class = "plot-container", plotOutput("swell_consistency_monthly_multi")))
                  )
         )
       )
@@ -723,6 +723,80 @@ server <- function(input, output) {
       )
     
   })
-}
+  
+  
+  #multi swell consistency
+  output$swell_consistency_monthly_multi <- renderPlot({
+    req(multi_spot())#min_height <- 1.0         # meters
+    
+    #surfability threshold
+    min_height <- 1.0         # meters
+    max_height <- 2.5         # meters
+    min_period <- 8           # seconds
+    direction_tolerance <- 45 # degrees
+    
+    #flexible optimal_direction
+    optimal_directions <- multi_spot() %>%
+      filter(
+        swell_height_max >= min_height,
+        swell_period_max >= min_period
+      ) %>%
+      group_by(spot) %>%
+      summarise(
+        optimal_direction = median(swell_direction_dominant, na.rm = TRUE),
+        .groups = "drop"
+      )
+    
+    multi <- multi_spot() %>%
+      left_join(optimal_directions, by = "spot") %>%     # IMPORTANT!
+      mutate(
+        month = lubridate::floor_date(as.Date(date), "month"),
+        is_surfable =
+          (swell_height_max >= min_height & swell_height_max <= max_height) &
+          (swell_period_max >= min_period) &
+          (abs(swell_direction_dominant - optimal_direction) <= direction_tolerance)
+      ) %>%
+      group_by(month, spot) %>%
+      summarise(
+        consistency_pct = mean(is_surfable, na.rm = TRUE) * 100,
+        .groups = "drop"
+      ) %>%
+      arrange(month)
+    
+    
+    # Color palette for spots
+    spot_colors <- setNames(
+      c("#00798C", "#66C2A5"),  # Spot1 = deep teal blue, Spot2 = seafoam green
+      c(input$spot1, input$spot2)
+    )
+    
+    # Plot
+    ggplot(multi, aes(
+      x = month,
+      y = consistency_pct,
+      fill = spot,
+      color = spot
+    )) +
+      geom_area(alpha = 0.25, size = 0.8) +   # transparent fills + colored borders
+      scale_x_date(date_breaks = "1 month", date_labels = "%b %Y") +
+      scale_y_continuous(labels = function(x) paste0(x, "%")) +
+      labs(
+        x = "Month",
+        y = "Surfable Days (%)",
+        fill = "Spot",
+        color = "Spot",
+        title = "Swell Consistency per Spot"
+      ) +
+      theme_minimal(base_size = 14) +
+      theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom"
+      ) +
+      scale_fill_manual(values = spot_colors) +
+      scale_color_manual(values = spot_colors)
+  
+})
 
+  
+}  
 shinyApp(ui = ui, server = server)
